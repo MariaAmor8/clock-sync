@@ -38,9 +38,8 @@ Traceback (most recent call last):
   File "/home/redes/projects/DDS-Benchmarking/scripts/accounting_remote.py", line 51, in stop
     self.command("stop", timeout=20)
   File "/home/redes/projects/DDS-Benchmarking/scripts/accounting_remote.py", line 29, in command
+ValueError: B accounting stop: publisher@10.10.10.4: Permission denied (publickey,password). https://docs.google.com/document/d/1wCMJrOs_wGZpxyb2M9S6uThPGzoWrMVC_Tj8BG_DWOY/edit?usp=sharing
     raise ValueError(f"B accounting {action}: {result.stderr.strip() or result.stdout.strip()}")
-ValueError: B accounting stop: publisher@10.10.10.4: Permission denied (publickey,password).
-
 ----------------------------------------------------------------------
 Ran 15 tests in 4.036s
 
