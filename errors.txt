@@ -1,0 +1,47 @@
+redes@s1-reader:~/projects/DDS-Benchmarking$ DDS_TEST_REMOTE=1 DDS_TEST_REMOTE_HOST=publisher@10.10.10.4 DDS_TEST_REMOTE_REPO=/home/redes/projects/DDS-Benchmarking python3 -m unittest discover -s scripts/tests -p test_accounting_transport.py -v
+test_agent_samples_during_job_and_freezes_on_rpc_stop_or_signal (test_accounting_transport.AgentLoopTests.test_agent_samples_during_job_and_freezes_on_rpc_stop_or_signal) ... ok
+test_start_from_old_a_is_rejected_before_creating_session (test_accounting_transport.AgentLoopTests.test_start_from_old_a_is_rejected_before_creating_session) ... ok
+test_probe_stderr_survives_failure_persistence (test_accounting_transport.CheckDiagnosticsTests.test_probe_stderr_survives_failure_persistence) ... WARNING Resource measurement failed: groups host=B run=fixture_S01_1: Command '['launcher']' returned non-zero exit status 78.; stderr: join monitoring cgroup: Permission denied; Will retry on the next run
+ok
+test_remote_diagnostics_read_wrapper_and_application_logs (test_accounting_transport.CheckDiagnosticsTests.test_remote_diagnostics_read_wrapper_and_application_logs) ... ok
+test_remote_membership_wrapper_command_runs_locally_without_groups (test_accounting_transport.CheckDiagnosticsTests.test_remote_membership_wrapper_command_runs_locally_without_groups) ... ok
+test_agent_execution_membership_reconnect_cancel_and_freeze (test_accounting_transport.RemoteAcceptanceTests.test_agent_execution_membership_reconnect_cancel_and_freeze) ... ERROR
+test_cancel_before_execute_prevents_late_launch (test_accounting_transport.TransportTests.test_cancel_before_execute_prevents_late_launch) ... ok
+test_cancel_escalates_and_stop_rejects_new_work (test_accounting_transport.TransportTests.test_cancel_escalates_and_stop_rejects_new_work) ... ok
+test_cli_wait_returns_wrapper_exit_code_and_output (test_accounting_transport.TransportTests.test_cli_wait_returns_wrapper_exit_code_and_output) ... ok
+test_execute_reconstructs_environment_and_writes_large_output (test_accounting_transport.TransportTests.test_execute_reconstructs_environment_and_writes_large_output) ... ok
+test_launch_error_retains_errno_and_control_errors_have_context (test_accounting_transport.TransportTests.test_launch_error_retains_errno_and_control_errors_have_context) ... ok
+test_missing_socket_and_malformed_client_do_not_stop_server (test_accounting_transport.TransportTests.test_missing_socket_and_malformed_client_do_not_stop_server) ... ok
+test_permissions_check_and_incompatible_or_unready_agent (test_accounting_transport.TransportTests.test_permissions_check_and_incompatible_or_unready_agent) ... ok
+test_persisted_accepted_job_is_unknown_and_never_relaunched (test_accounting_transport.TransportTests.test_persisted_accepted_job_is_unknown_and_never_relaunched) ... ok
+test_reconnect_and_duplicate_requests_do_not_replay_and_sampling_continues (test_accounting_transport.TransportTests.test_reconnect_and_duplicate_requests_do_not_replay_and_sampling_continues) ... ok
+
+======================================================================
+ERROR: test_agent_execution_membership_reconnect_cancel_and_freeze (test_accounting_transport.RemoteAcceptanceTests.test_agent_execution_membership_reconnect_cancel_and_freeze)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "/home/redes/projects/DDS-Benchmarking/scripts/tests/test_accounting_transport.py", line 355, in test_agent_execution_membership_reconnect_cancel_and_freeze
+    metadata = agent.start(.1)
+               ^^^^^^^^^^^^^^^
+  File "/home/redes/projects/DDS-Benchmarking/scripts/accounting_remote.py", line 33, in start
+    self.metadata = self.command("start", "--interval", interval, "--protocol-version", VERSION)
+                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/redes/projects/DDS-Benchmarking/scripts/accounting_remote.py", line 29, in command
+    raise ValueError(f"B accounting {action}: {result.stderr.strip() or result.stdout.strip()}")
+ValueError: B accounting start: publisher@10.10.10.4: Permission denied (publickey,password).
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/redes/projects/DDS-Benchmarking/scripts/tests/test_accounting_transport.py", line 413, in test_agent_execution_membership_reconnect_cancel_and_freeze
+    agent.stop()
+  File "/home/redes/projects/DDS-Benchmarking/scripts/accounting_remote.py", line 51, in stop
+    self.command("stop", timeout=20)
+  File "/home/redes/projects/DDS-Benchmarking/scripts/accounting_remote.py", line 29, in command
+    raise ValueError(f"B accounting {action}: {result.stderr.strip() or result.stdout.strip()}")
+ValueError: B accounting stop: publisher@10.10.10.4: Permission denied (publickey,password).
+
+----------------------------------------------------------------------
+Ran 15 tests in 4.036s
+
+FAILED (errors=1)
